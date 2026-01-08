@@ -1,0 +1,3 @@
+[submodule "pset"]
+	path = pset
+	url = git@github.com:HilariousJon/Math566-pset.git
