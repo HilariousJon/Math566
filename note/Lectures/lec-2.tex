@@ -1,0 +1,102 @@
+\begin{corollary}
+  There are \( (p-1)^l + (-1)^l (p-1) \) closed walks in \( K_p \).
+\end{corollary}
+
+\begin{notation}
+  \leavevmode
+  \begin{itemize}
+    \item \( \mathbb J \) is the all \( 1 \) matrix.
+    \item \( \mathbb I \) is the identity matrix.
+  \end{itemize}
+\end{notation}
+
+\begin{proof}
+  For \( K_p \), the adjacency matrix is given by \( A(K_p) = \JJ - \II \), with the eigenvalue of \( \JJ \) being \( \{p, 0, \ldots, 0\} \) and the eigenvalues of \( \II \) being \( \{1, \ldots, 1\} \). By \textbf{Lemma} \ref{lem:poly-eigen}, here we have \( f(x) = x - 1 \), with \( \JJ \) pluggined, thus yields the result.
+\end{proof}
+
+\begin{corollary}
+  There are \( \frac{1}{p}((p-1)^l - (-1)^l) \) non-closed walks of length \( l \) in \( K_p \).
+\end{corollary}
+
+\begin{proof}
+  Consider the matrix \( A(K_p)^l = (\JJ - \II)^l \), since \( \JJ \) and \( \II \) commutes, one can expand it using the binomial theorem:
+  \[
+    (\JJ - \II)^l = \sum_{i=0}^l (-1)^{l-i}\binom{l}{i} \JJ^i 
+  \] 
+  And note that:
+  \[
+    \JJ^i = 
+    \begin{cases}
+      \JJ^0 = \II \quad i=0 \\ 
+      p^{i-1} \JJ \quad i > 0 
+    \end{cases}
+  \] 
+
+  Then see that:
+  \[
+    \begin{aligned}
+      \sum_{i=0}^l (-1)^{l-i}\binom{l}{i} \JJ^i  &= \bace{\sum_{i=0}^p (-1)^{l-i}\binom{l}{i}p^{i-1}} \JJ + (-1)^l \II \\ 
+                                                 &= \bace{\sum_{i=0}^p (-1)^{l-i}\binom{l}{i}p^{i-1} - (-1)^l \frac{1}{p}} \JJ + (-1)^l \II \\ 
+                                                 &= \bace{\frac{1}{p}(p-1)^l - (-1)^l \frac{1}{p}} \JJ + \underbrace{(-1)^l \II}_{\text{contribute nothing}}
+    \end{aligned}
+  \] 
+\end{proof}
+
+One can note that \( \lambda_i \) of \( A(G) \) is completely determined by traces of \( A(G)^l \; \; \forall l \geq 1\) by \textbf{Lemma} \ref{lem:match}. In particular if we know enough number of traces of \( A(G)^l \) for multiple \( l \), then we can calculate out the eigenvalues.
+
+\section{Radon Transform}
+
+We may define inner product space and orthogonal stuff first.
+
+\begin{definition}[\textbf{Inner product space}]
+  An \underline{inner product} space is a vector space over \( \CC \) together with an inner product \( \angl{-,-}: V \times V \to \CC \), s.t. \( x,y,z \in V, \; \; a,b \in \CC \):
+  \begin{enumerate}
+    \item Conjugate symmetry: \( \angl{x,y} = \overline{\angl{y,x}} \).
+    \item Linearity with the first entry: \( \angl{ax+by, z} = a\angl{x,z} + b\angl{y,z} \).
+    \item Positivity: if \( x\ne 0 \), then \( \angl{x,x} > 0 \).
+  \end{enumerate}
+\end{definition}
+
+In this section we shall assume all \( V \) to be inner product space.
+
+\begin{definition}
+  \( x,y \in V \) are \underline{orthogonal} if \( \angl{x,y} = 0 \).
+\end{definition}
+
+\begin{lemma}
+  If \( \angl{x,y} = 0 \), then \( x,y \) are linearly independent.
+\end{lemma}
+
+\begin{definition}[\textbf{Kronecker Delta}]
+  Let \( S \) be a set, the \underline{kronecker delta} function on \( S^2 \) is given by:
+  \[
+    \delta_{uv} = 
+    \begin{cases}
+      1, \quad u=v \\ 
+      0, \quad u\ne v 
+    \end{cases}
+  \] 
+\end{definition}
+
+Let \( \ZZ_2 \) be the cyclic group of order \( 2 \), i.e. \( (\{0,1\}, +) \).
+
+Let \( \ZZ_2^n \) be the \( n \)-folde product of \( \ZZ_2 \), called an \( n \)-cube:
+\[
+  \ZZ_2^n = \{(a_1, \ldots, a_n) \; | \; a_i \in \ZZ_2\}
+\] 
+
+such set has some properties if viewed as a vector space, for example, \( ZZ_2^n \) has a dot product defined by:
+\[
+  \begin{aligned}
+    \angl{-,-}: \ZZ_2^n \times \ZZ_2^n & \to \ZZ_2 \\ 
+    \angl{y,z} &\mapsto \underbrace{\sum y_i z_i}_{\text{group adding}} \in \ZZ_2 
+  \end{aligned}
+\] 
+
+\begin{lemma}
+  \( \forall u,v,w\in ZZ_2^n \), see that \( u+v = w \iff u+w = v \iff v+w = u\).
+\end{lemma}
+
+The proof directly follows once realize that in this group \( (-) \) is the same as \( (+) \).
+
+For \( u\in \ZZ_2^n \), the \underline{weight} \( \abs{u} = \sum u_i \) which count the number of entries that is non-zero.

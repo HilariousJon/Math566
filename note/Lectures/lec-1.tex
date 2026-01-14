@@ -1,9 +1,9 @@
-\chapter{Linear Algebra Lemma}
+\chapter{Lemma}
 
 This chapter basically collect some linear algebra lemma that maybe helpful across the course.
 
 \begin{lemma}
-  Given \( A \) to be a matrix, who has the eigenvalues to be \( \lambda+1, \ldots, \lambda_p \), then the eigenvalues of the matrix \( A+c\Id \) where \( c \in \CC \) is \( \lambda_1 + c, \ldots, \lambda_p+c \).
+  Given \( A \) to be a matrix, who has the eigenvalues to be \( \lambda_1, \ldots, \lambda_p \), then the eigenvalues of the matrix \( A+c\Id \) where \( c \in \CC \) is \( \lambda_1 + c, \ldots, \lambda_p+c \).
 \end{lemma}
 
 \begin{lemma}
@@ -11,6 +11,24 @@ This chapter basically collect some linear algebra lemma that maybe helpful acro
   Let \( A \) be as above, the eigenvalues of \( A^l \) are \( \lambda_1^l, \ldots, \lambda_p^l \).
 \end{lemma}
 
+\begin{lemma}
+  \label{lem:poly-eigen}
+  Let \( f \in \CC[t] \), then \( f(A) \) has eigenvalues being \( \{f(\lambda_i)\}_{i=1}^p \).
+\end{lemma}
+
+\begin{lemma}
+  If \( A \) is a real and symmetric matrix, by spectral theorem for Hermitian product, we have \( \lambda_i \in \RR \).
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:match}
+  Let \( \{\alpha_i\}_{i=1}^r \) and \( \{\beta_i\}_{i=1}^s \) be non-zero complex numbers, if for every \( l \geq 1 \), we have:
+  \[
+    \sum_{i=1}^{r}\alpha_i^l = \sum_{i=1}^s \beta_i^l 
+  \] 
+
+  then \( r=s \) and \(\{\alpha_i\} \) is permutation of \( \{\beta_i\} \).
+\end{lemma}
 
 \chapter{Walks in Graph}
 
