@@ -1,4 +1,4 @@
-\chapter{Lemma}
+\chapter{Linear Algebra}
 
 This chapter basically collect some linear algebra lemma that maybe helpful across the course.
 
@@ -130,3 +130,29 @@ Thus we can define the graph properly.
 \end{theorem}
 
 The proof is straightforward combining the \textbf{Proposition} \ref{prop:count-walk} and \textbf{Lemma} \ref{lem:nilpotent}.
+
+\begin{definition}[\textbf{Unitary Matrix}]
+  A complex square matrix \( U \) is \underline{unitary} if \( U^* = U^{-1} \).
+\end{definition}
+
+\begin{definition}[\textbf{Orthogonal Matrices}]
+  An orthogonal matrix is a real square matrix \( O \) whose rows and cols are \textbf{orthonormal}, in particular equivalent to:
+  \[
+    O^\intercal = O^{-1}
+  \] 
+\end{definition}
+
+\begin{theorem}[\textbf{Spectral Theorem for Hermitian Matrices}]
+  \label{thm:spectral}
+  A complex (real) square matrix \( A \) is Hermitian (real symmetric). Then there exists a unitary (orthogonal) \( U \) and a real diagonal matrix \( \Lambda \), s.t.
+  \[
+    A = U \Lambda U^{-1}
+  \] 
+
+  where 
+  \[
+    \Lambda = \diag(\lambda_1, \ldots,\lambda_n)
+  \] 
+  
+  In particular, \( U \) can be chosen to have the orthonormal eigenvectors of \( A \) as its column vectors.
+\end{theorem}

@@ -1,0 +1,152 @@
+\subsection{Counting in Cube}
+
+In this section we shall use Radon Transform to help counting the closed walks in a cube. For other special graphs, one can similarly embed the structure of it into a specific group and construct the corresponding Radon Transform to count. It may rely on specific kinds of symmetry but really provide and powerful and convenient tool for counting.
+
+\begin{proposition}
+  Let \( V \) be all functions \( f: \ZZ_2^n \to \CC \). This is a vector space over \( \CC \), we have the following fact:
+  \begin{enumerate}
+    \item \( \dim_\CC V = 2^n \), with the basis given by:
+      \[
+        i_u (v) = \begin{cases}
+          1, \text{ if } u = v \\ 
+          0, \text{ if } u \ne v 
+        \end{cases}
+      \] 
+    \item \( V \) has a inner product space structure over \( \CC \):
+      \[
+        \angl{f,g} = \sum_{u\in\ZZ_2^n}f(y) \overline{g(u)}
+      \] 
+    \item \( V \) has basis:
+      \[
+        \begin{aligned}
+          \cB_1 &= \{f_u: \; u\in \ZZ_2^n, \; f_u(v) = \delta_{uv}\} \\ 
+          \cB_2 &= \{\chi_u: \; \chi_u(v) = (-1)^{uv}\}
+        \end{aligned}
+      \] 
+
+      See that:
+      \[
+        g(v) = \sum_{u\in \ZZ_2^n} g(v)\delta_{uv} = \sum_{u\in \ZZ_2^n} g(v)f_u(v)
+      \] 
+
+      and 
+      \begin{equation}
+        \label{eq:eigen}
+        \begin{aligned}
+          \angl{\chi_u, \chi_v} &= \sum_{w\in \ZZ^n_2} \chi_u(w) \overline{\chi_v(w)} \\ 
+                                &= \sum_{w\in \ZZ^n_2}(-1)^{(u+v)\cdot w} \\ 
+                                &= \begin{cases}
+                                  2^n, \text{ if } u=v \iff 2u = 0 \\ 
+                                  0, \text{ if } u \ne v
+                                \end{cases}
+        \end{aligned}
+      \end{equation}
+
+      which means that \( \chi_u \) and \( \chi_v \) are orthogonal and thus linearly independent. The part that leads to \( 0 \) can be deduce by pairing vector \( w \) on the entry that \( (u+v) \) is \( 1 \).
+  \end{enumerate}
+\end{proposition}
+
+\begin{definition}[\textbf{Radon Transform}]
+  For a subset \( \Gamma \in \ZZ_2^n \) and a function \( f\in V: \ZZ^n_2 \to \CC \), the \underline{discrete radon transform} on \( \Gamma \) of \( \ZZ^n_2 \) is:
+  \[
+    \Phi_{\Gamma} (f) (v) \coloneqq  \sum_{w\in \Gamma}f(v+w)
+  \] 
+
+  this is a linear transformation \( V\to V \).
+\end{definition}
+
+\begin{theorem}
+  The eigenvectors of \( \Phi_\Gamma \) are \( \{\chi_u\}_{u\in \ZZ_2^n} \), with eigenvalues being \( \lambda_u = \sum_{w\in \Gamma} (-1)^{u\cdot v} \).
+\end{theorem}
+
+\begin{proof}
+  See that:
+  \[
+    \begin{aligned}
+      \Phi_\Gamma(\chi_u)(v) &= \sum_{w\in \Gamma}\chi_u(v+w) \\ 
+                             &= \sum_{w\in \Gamma }(-1)^{u(v+w)} \\ 
+                             &= (-1)^{uv}\sum_{w\in \Gamma }(-1)^{uw} \\ 
+                             &= \chi_u(v) \cdot \lambda_u 
+    \end{aligned}
+  \] 
+\end{proof}
+
+\begin{definition}
+  The \( n \)-cube graph \( C_n \) is the graph with:
+  \begin{itemize}
+    \item \( V(G) = \ZZ_2^n \).
+    \item \( E(G) = \{(u,v) \; | \; u,v \text{ differ in only 1 coordinate}\} \), for example the 3-dimensional cube.
+  \end{itemize}
+
+  The adjacency matrix of this kinds of graph is rather complicated and hard to comprehend and compute its eigenvalue by simply looking at the matrix.
+\end{definition}
+
+We now propose a simpler way to obtain the eigenvalue and eigenvector of adjacency matrix of \( n \)-cube graph, basically choosing special subset to do radon transform and see that the matrix is exactly the same.
+
+Let \( \Delta \) be the set:
+\[
+  \Delta \coloneqq  \{\delta_i \; | \; \delta_i \text{ is the i-th unit vector in } \ZZ^n_2\} \subseteq \ZZ^n_2 
+\] 
+
+Let \( \Phi_\Delta : V \to V \), and \( [\Phi_\Delta] \) be the matrix of \( \Phi_\Delta \) w.r.t. \( \cB_1 = \{f_u: \; u\in \ZZ^n_2\} \).
+
+\begin{lemma}
+  The matrix \( [\Phi_\Delta] = A(C_n) \).
+\end{lemma}
+
+\begin{proof}
+  Basically we want to see that all entries on the left hand side is the same as the right hand side, so we consider the \((u,v)\)-entry of \( [\Phi_\Delta] \), let \( z\in \ZZ^n_2 \), and compute: \( \Phi_\Delta f_u(v) \),
+  \[
+    \begin{aligned}
+      \Phi_\Delta f_u(z) &= \sum_{w\in \Delta}f_u(z+w) \\ 
+                         &= \sum_{w\in \Delta}f_{u+w}(z) \\ 
+      \implies \Phi_\Delta f_u &= \sum_{u\in\Delta} f_{u+w} \\ 
+      \implies [\Phi_\Delta]_{u,v} &= \begin{cases}
+        1, \text{ if } \textcolor{red}{u+w = v} \\ 
+        0, \text{ if } u+w \ne v 
+      \end{cases} \\ 
+      \iff [\Phi_\Delta]_{u,v} &= \begin{cases}
+        1, \text{ if } \textcolor{red}{u+v = w\in \Delta} \\ 
+        0, \text{ otherwise}
+      \end{cases} \\ 
+        \iff [\Phi_\Delta]_{u,v} &= \begin{cases}
+          1, \text{ if } \textcolor{red}{u,v \in E(C_n)} \\ 
+          0, \text{ otherwise}
+        \end{cases}
+    \end{aligned}
+  \] 
+\end{proof}
+
+\begin{corollary}
+  The eigenvectors of \( A(C_n) \) are:
+  \[
+    \textcolor{red}{\cE_u = \sum_{v\in \ZZ^n_2} (-1)^{u\cdot v}v} 
+  \] 
+
+  With eigenvalues being:
+  \[
+    \textcolor{red}{\lambda_u = n - 2\abs{u}}
+  \] 
+
+  In particular, \( A(C_n) \) has \( \binom{n}{k} \) eigenvalues equal to \( n-2k \).
+\end{corollary}
+
+\begin{proof}
+  For \( g\in V \), see that \( g = \sum_{v\in \ZZ^n_2}g(v)\cdot f_v \), which implies that:
+  \[
+    g(u) = \sum_{v\in \ZZ^n_2} g(v)f_v(u) = \sum_{v\in \ZZ^n_2} g(v) \delta_{uv}
+  \] 
+
+  Recall that \( [\Phi_\Delta]_{\cB_1} \) has eigenvectors \( \{\chi_u(v) = (-1)^{u\cdot v}\} \), then:
+  \[
+    \chi_u = \sum_{v\in \ZZ^n_2}\chi_u(v) f_v = \sum_{v\in \ZZ^n_2} (-1)^{u\cdot v} f_v 
+  \] 
+
+  with eigenvalues being:
+  \[
+    \lambda_u = \sum_{w\in \Delta} (-1)^{u\cdot w} = \sum_{i\in [n]} (-1)^{u\cdot \delta_i} = n - 2\abs{u}
+  \] 
+
+  Notice that those \( \cE_u \) with the \textbf{Hamming Weight} of \( u \) being the same share the same eigenvalue, total number of such \( u \) will be \( \binom{n}{k} \) if \( \abs{u} = k \).
+\end{proof}
+

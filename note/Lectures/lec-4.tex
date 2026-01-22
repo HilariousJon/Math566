@@ -1,0 +1,69 @@
+\begin{proposition}
+  \label{prop:to-cor}
+  If \( G \) is a graph with \( p \) vertices and eigenvalues \( \lambda_1, \ldots, \lambda_p \), then there exists \( c_1, \ldots, c_p \in \RR \), s.t.
+  \[
+    A(G)^l_{ij} = \sum_{k=1}^{p}c_k \lambda_k^l 
+  \] 
+
+  And in particular, if \( U \) is an \textbf{orthogonal} matrix (\( A(G) = U\Lambda U^{-1} \)), then:
+  \[
+    A(G)^l_{ij} = \sum_{k=1}^n U_{ik}U_{jk}\lambda_k^l 
+  \] 
+\end{proposition}
+
+\begin{proof}
+  By \textbf{Spectral Theorem} \ref{thm:spectral}, there exists an orthogonal matrix \( U \), s.t.
+  \[
+    A = U\Lambda U^{-1}
+  \] 
+
+  Let \( l \geq 1 \), then:
+  \[
+    A^l = U\Lambda^l U^{-1}
+  \] 
+
+  take the \( (i,j) \)-entry of right hand side and see that it equal to \( \sum_{k=1}^n U_{ik}U_{jk}\lambda_k^l \).
+\end{proof}
+
+\begin{corollary}
+  Let \( u,v\in \ZZ^n_2 \), supppose that \( \abs{u+v} = k \), i.e. \( u \) and \( v \) \textbf{differ} in \( k \) places, then:
+  \[
+    A(C_n)^l_{uv} = \frac{1}{2^n} \sum_{i=1}^n \sum_{j=1}^k (-1)^k \binom{k}{j} \binom{n-k}{i-j}(n-2i)^l \qquad (i\geq j)
+  \] 
+\end{corollary}
+
+\begin{proof}
+  Consider the eigenvector of \( A(C_n) \), given by:
+  \[
+    \cE_u = \sum_{v\in \ZZ_2^n}(-1)^{u\cdot v} v
+  \]
+
+  By \textbf{Equation} \ref{eq:eigen}, \( \abs{\cE_u} = 2^{\frac{n}{2}} \), so one needs to normalize it to get the orthonormal basis:
+  \[
+    \cE'_u = \frac{1}{2^{\frac{n}{2}}} \cE_u 
+  \] 
+
+  Then by \textbf{Proposition} \ref{prop:to-cor}, we have: 
+  \[
+    A(C_n)^l_{uv} = \frac{1}{2^n}\sum_{w\in \ZZ^n_2} \cE'_{uw}\cE'_{vw} \lambda_{w}^l
+  \] 
+
+  One can then consider what is \( \cE'_{uw} \), written in canonical basis \( v\in \ZZ^n_2 \), it is exactly:
+  \[
+    \cE'_{uw} = (-1)^{u\cdot w}
+  \] 
+  Thus we have:
+  \[
+    A(C_n)^l_{uv} = \frac{1}{2^n}\sum_{w\in \ZZ^n_2} \textcolor{red}{(-1)^{(u+v)\cdot w}} (n-2\abs{w})^l 
+  \] 
+
+  One may consider the \textcolor{red}{red} part, with the number of vectors \( w \) of \textbf{Hamming Weight} \( i \) which have \( j \) \( 1 \)'s in common with \( u+v \) is:
+  \[
+    \binom{k}{j}\binom{n-k}{i-j}
+  \] 
+  it is simply the way of how we choose \( w \), so that the dot product result \( \mathbf{(u+v)\cdot w = j} \). As \( w \) runs over all elements in \( \ZZ^n_2 \), where \( k \) is just \( \abs{u+v} \) to be the \textbf{upper bound} of \( j \), see that:
+  \[
+    A(C_n)^l_{uv} = \frac{1}{2^n} \sum_{i=1}^n \sum_{j=1}^{k} (-1)^j \binom{k}{j} \binom{n-k}{i-j} (n-2i)^{l} \quad (i = \abs{w})
+  \] 
+\end{proof}
+
