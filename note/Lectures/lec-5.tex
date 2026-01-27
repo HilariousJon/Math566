@@ -87,14 +87,15 @@
 \begin{proof}
   One can prove the theorem by deviding the case of whether \( S \) forms a spanning tree of \( G \):
   \begin{itemize}
-    \item If \( S \) doesn't forms a spanning tree. Then there must exsist a cycle \( C \) in the graph, denoted the edge of the cycle as \( f_1, \ldots, f_s \). The point is we want to make it as a oriented cycle, so that the column vector representing \( f_1, \ldots, f_s \) are linearly independent. For convenience one can interchange the column vector of \( f_1,\ldots, f_s \) into in order and adacent ones on the matrix, the determinant still remains the same.
+    \item If \( S \) doesn't forms a spanning tree. Then there must exsist a cycle \( C \) in the graph, denoted the edge of the cycle as \( f_1, \ldots, f_s \). The point is we want to make it as a oriented cycle, so that the column vector representing \( f_1, \ldots, f_s \) are linearly dependent. For convenience one can interchange the column vector of \( f_1,\ldots, f_s \) into in order and adacent ones on the matrix, the determinant still remains the same. One can choose an directed orientation on such edges set, for example in the sense that \( 1\to2\to \cdots\to s \), and for those edges with the same orientation with the chosen one, we multiply the column vectors with \( 1 \) and for those who are not, we multiply with \( -1 \) for the column vectors. One can see that by definition, summing over all such column vectors with the result leads to \( 0 \), thus \( f_1, \ldots, f_s \) are linearly dependent, thus the determinant will be \( 0 \).
+    \item If \( S \) did forms a spanning tree. By degree handshake theorem, one can see that the tree always have a leave vertex, namely a vertex that only connects with a unique edge.
   \end{itemize}
 \end{proof}
 
 \begin{theorem}[\textbf{Matrix-Tree Theorem}]
   Let \( G \) be a finite connected graph without loops. The \# of spanning trees of \( G \) is:
   \[
-   \kappa(G) = L_{r,c}(G) \qquad \forall r,c
+   \kappa(G) = L_{r,c}(G) \qquad \forall \; r,c
   \] 
   where \( L_{r,c} \) is the \( (r,c) \)-cofactor of \( \LL(G) \).
 \end{theorem}
