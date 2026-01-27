@@ -1,0 +1,100 @@
+\section{Matrix-Tree Theorem}
+
+\begin{definition}[\textbf{Spanning Subgraph}]
+  A \underline{spanning subgraph} of a graph \( G \) is a graph \( H \) with the same vertex set as \( G \) and \( E(H) \subseteq E(G) \). 
+
+  (If \( G \) has \( q \) edges, there are \( 2^q \) spanning subgraph, in particular, choose whether each edges are included in.)
+\end{definition}
+
+\begin{definition}[\textbf{Spanning Tree}]
+  A \underline{spanning tree} is a spanning subgraph that is a \textbf{tree}. The \# of spanning tress in a graph \( G \) is called \underline{complexity of \( G \)}, denoted as \( \kappa(G) \).
+\end{definition}
+
+\begin{definition}[\textbf{Laplacian of a Graph}]
+  \label{def:laplacian}
+  The \underline{laplacian} of a graph \( G \) is given by:
+  \[
+    \LL (G) = \begin{cases}
+      - \abs{\vp^{-1}(v_i, v_j)}, \text{ if } v_i \ne v_j \\ 
+      \deg(v_i), \text{ otherwise}
+    \end{cases}
+  \] 
+
+  In short, the diagonal of such matrix will be the degree of the vertex, and the rest represent the number of edges connect between the vertices mult with \( -1 \).
+\end{definition}
+
+\begin{note}
+  The laplacian actually can also be given by:
+  \[
+    \LL(G) = \diag\{\deg(v_1), \ldots, \deg(v_n)\}  - A(G)
+  \] 
+\end{note}
+
+\begin{definition}[\textbf{(r,c)-Cofactor}]
+  Given a matrix \( A \), the \underline{(r,c)-cofactor} of \( A \) is the:
+  \[
+    A_{r,c}\coloneqq  (-1)^{r+c} \det A_{\hat{r}, \hat{c}  }
+  \] 
+  where \( \hat{r} \) represent deleting the \( r \)-th row, and \( \hat{c} \) represent deleting the \( c \)-th column.
+\end{definition}
+
+\begin{definition}[\textbf{Orientation}]
+  An \underline{orientation} of a graph \( G \) is an assignment of an order on every edge: which is, for every edge \( e\in E(G) \), for example, it connects \( u \) and \( v \), then choose one of the ordered pair \( (u,v) \) or \( (v,u) \) as direction. Such orientation is usually denoted as \( \mathfrak o \).
+\end{definition}
+
+\begin{definition}[\textbf{Incidence Matrix}]
+  The \underline{incident matrix} of a directed graph \( G \) with respect to the orientation \( \mathfrak o \) is the \( \abs{V}\times \abs{E} \) matrix whose \( (i,j) \)-entry is given by:
+  \[
+    \MM(G) = \begin{cases}
+      -1, \text{ if the edge }e_j \text{ has initial vertex } v_i \\ 
+      1, \text{ if the edge } e_j \text{ has final vertex } v_i \\ 
+      0, \text{ otherwise}
+    \end{cases}
+  \] 
+\end{definition}
+
+\begin{lemma}
+  \leavevmode 
+  \[
+    \LL(G) = \MM(G)\MM(G)^\intercal
+  \] 
+\end{lemma}
+
+\begin{proof}
+  The proof is quite straightforward once consider the situation of matrix manipulation, first denote \( \MM(G) = (m_{ij}) \):
+  \[
+    (\MM(G)\MM(G)^\intercal)_{ij} = \sum_{e_k\in E(G)} m_{ik}m_{jk}
+  \] 
+
+  Consider the situation of \( i=j \) and \( i\ne j \):
+  \begin{itemize}
+    \item When \( i\ne j \): One should only consider the case when \( e_k \) connects \( i \) and \( j \), otherwise one of them will be \( 0 \) and thus the product of them will be \( 0 \). So consider the case where \( i \) and \( j \) are connected by \( e_k \). In this case one vertex must be the source and one vertex must be the sink, thus one of them will be \( 1 \) and the other will be \( -1 \). Summing through all edges in the graph gives us the result to be \( -\abs{\vp^{-1}(v_i, v_j)} \).
+    \item When \( i=j \): In this case one will still only consider the case where \( e_k \) touches \( v_i = v_j \), otherwise one of \( m_{ik} \) or \( m_{jk} \) will be \( 0 \). Whether it is the source or sink it doesn't matter, the result should still yields to be \( 1 \). Summing through all edges in the graph gives us \( \deg(v_i=v_j) \).
+  \end{itemize}
+  It follows that this is exactly the \textbf{Definition} \ref{def:laplacian} of Laplacian.
+\end{proof}
+
+\begin{lemma}
+  Let \( \abs{V} = p \). Let \( S \) be a subset of \( p-1 \) edges. Let \( v \) be any vertex of \( G \). Then:
+  \[
+    \det(\underbrace{\MM_{\hat{v}}[S]}_{\textcolor{red}{(p-1)\times(p-1)}}) = \begin{cases}
+      \pm 1, \text{ if } S \text{ forms a spanning tree of } G \\ 
+      0, \text{ otherwise}
+    \end{cases}
+  \] 
+\end{lemma}
+
+\begin{proof}
+  One can prove the theorem by deviding the case of whether \( S \) forms a spanning tree of \( G \):
+  \begin{itemize}
+    \item If \( S \) doesn't forms a spanning tree. Then there must exsist a cycle \( C \) in the graph, denoted the edge of the cycle as \( f_1, \ldots, f_s \). The point is we want to make it as a oriented cycle, so that the column vector representing \( f_1, \ldots, f_s \) are linearly independent. For convenience one can interchange the column vector of \( f_1,\ldots, f_s \) into in order and adacent ones on the matrix, the determinant still remains the same.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}[\textbf{Matrix-Tree Theorem}]
+  Let \( G \) be a finite connected graph without loops. The \# of spanning trees of \( G \) is:
+  \[
+   \kappa(G) = L_{r,c}(G) \qquad \forall r,c
+  \] 
+  where \( L_{r,c} \) is the \( (r,c) \)-cofactor of \( \LL(G) \).
+\end{theorem}
