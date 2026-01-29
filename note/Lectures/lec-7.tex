@@ -1,0 +1,10 @@
+\begin{proof}
+	By the fact that \( \LL = \MM \MM^{\intercal} \), we have:
+	\[
+		\LL_{\hat{v}} = \MM_{\hat{v}} \MM_{\hat{v}}^\intercal
+	\]
+	Now apply \textbf{Cauchy-Binet Formula} \ref{thm:cauchy-binet}:
+	\[
+		\det(\LL_{\hat{v}}) = \sum_{|S| = p-1, S \subseteq [|E|]} \det(\MM_{\hat{v}}[S]) \det(\MM_{\hat{v}}[S]^\intercal) \xlongequal{\text{\textbf{Lemma} \ref{lem:count-spanning-tree}}} \kappa(G)
+	\]
+\end{proof}
