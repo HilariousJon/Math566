@@ -1,0 +1,122 @@
+\begin{lemma}
+	\label{lem:cofactor-same}
+	If \( \bA = (a_{ij}) \) is a square matrix of \( n\times n \) dimension, s.t.
+	\begin{itemize}
+		\item all the row sums are zero.
+		\item all the column sums are zero.
+	\end{itemize}
+	then:
+	\begin{enumerate}
+		\item for \( 1\leq r \leq n \), have:
+		      \[
+			      A_{r,1} = A_{r,2} = \cdots = A_{r,n}
+		      \]
+		\item for \( 1\leq c\leq r \)
+		      \[
+			      A_{1,c} = A_{2,c} = \cdots = A_{n,c}
+		      \]
+	\end{enumerate}
+	Namely all its cofactors are the same.
+\end{lemma}
+\begin{proof}
+	Fix \( r \), let \( \bA' \) be the matrix that has \( a'_{r,1} = a_{r,1} + 1 \), which bump the row sum of row \( r \) to be \( 1 \) instead of \( 0 \), and the other entries remains the same as \( \bA \). Choose a \( k \in \br{1,n} \). Let \( \bA'' \) be the matrix with the \( k \)-th column equal to the sum of all columns of \( \bA' \), and the other columns the same as \( \bA' \). As the column sum will be \( 0 \) except for row \( r \), the $k$-column of \( \bA'' \) will admit \( 1 \) at \( (r,k) \) and \( 0 \) at the rest of the entries. We have following observation:
+	\begin{itemize}
+		\item \( \det \bA' = \det\bA'' \). Since \( \bA'' \) is obtained by doing elementary operation from \( \bA' \).
+		\item \( \det \bA'' = A''_{r,k} \) by the fact that the \( k \)-th column only admits \( 1 \) at \( r \)-th row and \( 0 \) elsewhere.
+		\item \( \det \bA + A_{r,1} = \det\bA' \) by definition of determinant, and notice that \( \det\bA = 0 \implies A_{r,1} = A''_{r,k}\), and by construction of \( \bA'' \) see that \( A''_{r,k} = A_{r,k} \).
+	\end{itemize}
+	becase \( \bA' \) is independent of \( k \), \( A_{r,k} \) is independent of \( k \).
+\end{proof}
+
+\begin{definition}[\textbf{\( d \)-Regular Graph}]
+	A graph is \underline{\( d \)-regular} if all vertices have degree to be \( d \).
+\end{definition}
+
+\begin{proposition}
+	If \( G \) is \( d \)-regular on \( n \) vertices, the \( \LL(G) = d \cdot \II_{n} - \bA(G) \). In particular, if \( G \) has eigenvalues to be \( \lambda_1, \ldots, \lambda_n \) with \( \lambda_n = d \), then \( \LL(G) \) has eigenvalues \( d-\lambda_1, \ldots, d-\lambda_{n-1}, d-\lambda_n = 0 \). Moreover:
+	\[
+		\kappa(G) = \frac{1}{n} \prod_{i=1}^{n-1} (d-\lambda_i)
+	\]
+\end{proposition}
+
+\begin{proof}
+	Since \( \LL(G) \) has zero row and column sums, cofactors of \( \LL(G) \) are equal by \textbf{Lemma} \ref{lem:cofactor-same}. Compute the characteristic polynomial of \( \LL(G) \):
+	\[
+		\begin{aligned}
+			\det(\LL(G) - t\cdot \II_n) & = \det(\LL(G)) - t(L_1 + \cdots + L_{n,n}) + \text{higher degree terms}\quad (\text{results in linear algebra}) \\
+			                            & = \det(\LL(G)) - nt L_{1,1} + \text{higher degree terms}                                                        \\
+			                            & = -ntL_{1,1} + \text{higher degree terms}
+		\end{aligned}
+	\]
+	On the other hand,
+	\[
+		\det(\LL(G) - t\II_n) = \prod_{i=1}^n (\underbrace{\lambda'_i}_{\text{e.v. of } \LL(G)} - t) = -t\underbrace{(d-\lambda_1) \cdots (d-\lambda_{n-1})}_{\text{eigenvalues of } \LL(G) = d \cdot \II_n - \bA(G)} + \text{higher degree terms}
+	\]
+	thus
+	\[
+		\kappa(G) = L_{i,i} = \frac{1}{n} \prod_{i=1}^{n-1} (d-\lambda_i)
+	\]
+\end{proof}
+
+\begin{corollary}
+	Let \( G \) be a connected loopless graph with \( p \) vertices. Suppose that the eigenvalues of \( \LL(G) \) are given by \( \lambda_1, \ldots, \lambda_{n-1}, \lambda_n = 0 \), then:
+	\[
+		\kappa(G) = \frac{1}{n}\prod_{i=1}^{n-1}\lambda_i
+	\]
+\end{corollary}
+
+\begin{eg}
+	\leavevmode
+	\begin{enumerate}
+		\item Consider \( C_d \) be the cube graph with \( d \) dimensions, total vertices to be \( 2^d \), have:
+		      \begin{itemize}
+			      \item \( \bA(C_d) \) has \( d-2i \) as eigenvalues with multiplicity to be \( \binom{d}{i} \) for \( i \in \br{1,d} \).
+			      \item \( \LL(C_d) \) has eigenvalues \( 2i \) with multiplicity being \( \binom{d}{i} \) for \( i\in \br{1,d} \).
+			      \item Thus:
+			            \[
+				            \kappa(C_d)  =\frac{1}{2^d} \prod_{i=1}^d (2i)^{\binom{d}{i}}
+			            \]
+		      \end{itemize}
+		\item Consider \( K_p \) be the complete graph with \( p \) vertices.
+		      \begin{itemize}
+			      \item \( \bA(K_p) \) has eigenvalues being \( p-1, -1, \ldots, -1 \).
+			      \item \( \LL(K_p) \) has eigenavalues being \( 0, p, \ldots, p \).
+			      \item Thus:
+			            \[
+				            \kappa(K_p) = \frac{1}{p} \cdot (p^{p-1}) = p^{p-2}
+			            \]
+		      \end{itemize}
+	\end{enumerate}
+\end{eg}
+
+\section{Eulerian Tours}
+
+\begin{definition}[\textbf{Binary de Bruijn}]
+	Given a positive integer \( k \), a \underline{binary de Bruijn sequence of degree \( k \)} is a sequence of \( 0,1 \) that is periodic of period \( 2^k \) and that has the list of all contiguous subsequence to be exactly all binary strings of length \( k \).
+\end{definition}
+
+Namely we scan through the string, and any kinds of sequence consisting that alphabet with length \( k \) should only appear once.
+
+\begin{eg}
+	\leavevmode
+	\begin{itemize}
+		\item When \( k=2 \), the following forms a binary de Bruijn sequence of degree \( 2 \).
+		      \[
+			      1,1,0,0,1
+		      \]
+		\item When \( k=3 \), the following forms a binary de Bruijn sequence of degree \( 3 \).
+		      \[
+			      0,0,0,1,1,1,0,1,0,0,0
+		      \]
+		      which attains \( 000 \), \( 001 \), \( 011 \), \( 111 \), \( 101 \), \( 010 \), \( 100 \).
+	\end{itemize}
+\end{eg}
+
+\begin{definition}[\textbf{Directed graph}]
+	A \underline{directed graph or a digraph} \( D \) is \( (V,E, \vp) \) where \( \vp: E \to V \times V \) which maps to ordered pair of vertices.
+\end{definition}
+
+\begin{definition}[\textbf{Eulerian Tour}]
+	An \underline{Eulerian tour} in \( G \) is a closed walk that visit all vertices and very edge exactly \( 1 \) times. Note that vertices can be visited many times.
+\end{definition}
+
