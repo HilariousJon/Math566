@@ -1,0 +1,84 @@
+\begin{definition}[\textbf{Arborescence}]
+	an arborescence is a directed graph where there exists a vertex $r$ (called the root) such that, for any other vertex $v$, there is exactly one directed walk from $r$ to $v$ (noting that the root $r$ is unique). If the underly tree is spanning in \( G_D \), then we say the arborescence is spanning.
+\end{definition}
+
+\begin{definition}
+	\leavevmode
+	\begin{itemize}
+		\item \( \cE (D,e) = \) \# of Eulerian tours that has its first edge to be \( e \).
+		\item \( \tau (D,v) =  \) \# of (spanning) arborescences rooted at \( v \).
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[\textbf{Weakly Connected}]
+	A digraph \( D \) is \underline{weakly connected} if \( D \) is connected as an undirected graph.
+\end{definition}
+
+\begin{definition}[\textbf{Strongly Connected}]
+	A digraph \( D \) is \underline{strongly connected} if there is a directed walk between any two vertices. Note that a walk goes from one of them to the other is enough.
+\end{definition}
+
+\begin{note}
+	Clearly if a graph \( D \) is strongly connected, then it is weakly connected.
+\end{note}
+
+\begin{lemma}
+	Let \( D \) be a finite directed graph without isolated vertices, \textbf{TFAE}:
+	\begin{enumerate}
+		\item \( D \) is Eulerian.
+		\item \( D \) is connected as an undirected graph, and is balanced. (weakly connected + balanced)
+		\item \( D \) is connected directedly and balanced. (strongly connected + balanced)
+	\end{enumerate}
+	A digraph is balanced if for any vertices \( v \) in \( D \), the indegree of \( v \) is equal to the outdegree of \( v \) is equal to the outdegree of \( v \).
+\end{lemma}
+
+\begin{proof}
+	Suppose that \( D \) is eulerian and there exists an eulerian tour \( e_1, \ldots, e_q \), with
+	the source being \( v \). As we move along the tour, whenever we enter a vertex we must then exit
+	it, except the final vertex of \( e_f \) without exiting it. But this is the source vertex so we
+	exit it at the beginning, thus every vertex entered as often as exit, and they must have the same
+	indegree and outdegree. Therefore \( D \) is balanced. Note that \( D \) is clearly strongly
+	connected and thus weakly connected.
+
+	Conversely given a balanced, weakly connected digraph, we want to see that it is eulerian.
+	The generalhidea is to first prove that for any vertex \( v \) in the digraph, there exists a tour
+	starts with \( v \) and then ends with \( v \). And then since \( D \) is a finite digraph, one
+	can then choose a tour with maximum length \( r \), and try to prove that \( r=q \) be proceeding
+	contradiction that if \( r < q \), such will contradict to the maximality of \( r \).
+
+	Since \( D \) is connected one may assume that \( D \) contains at least one edge \( e \), take
+	the source of that edge and denote it as \( v \). Consider \( e = (v,u) \), if \( u = v\) and we
+	are done. If \( u\ne v \), since the indegree of \( u \) equals to the outdegree, then there is
+	some exit edge \( e_1 \), either the target of \( e_1 \) being \( v \) and we are done, or being
+	some vertex \( w \), and continuing this way, either we complete a tour or else we have entered
+	the current vertex once more than we have exited, which guaranteed by balanced that there exists
+	an exit along a new edge other than previously in the tour. Since \( D \) has finitely many edges,
+	evetually we must complete a tour. Thus \( D \) does have a tour that starts at any
+	vertex \( v \), and thus for any edge \( e \), there exists a tour that use \( e \).
+
+	One can then take the maximum size of tour, denoted as \( e_1, \ldots, e_r \), one shall then want
+	to prove that \( r = q \). Suppose that \( r < q \), then the edges form a subgrpah \( C \) of \( D \).
+	By definition, \( C \) should be also a balanced graph. Thus consider the graph
+	\( H:= D \backslash C \) by removing all edges of \( C \) out of \( D \), since \( D,C \) are both
+	balanced graph, \( H \) shall also be a balanced graph, although may not connected. One shall then
+	observe that there must exists a connected component \( H_1 \) in \( H \) that contains at least
+	one edge, and a vertex \( v \) that is also contained in \( C \), otherwise see that the tour is
+	then directly being the eulerian tour and we have \( r = q \), a contradiction. Thus we have such
+	\( H_1 \) exists. But then see that in \( H_1 \) there exists a tour \( C' \) starts from \( v \)
+	and ends with \( v \) by our previous reasoning, this gives us a ``detour'' as one can enlarge the
+	tour by when moving along \( C \), when arrive \( v \), one can make detour on \( C' \) and back
+	on \( v \) then proceed. This gives us a longer tour, contradicting to the maximality of \( r \)
+	$\lightning$. Thus \( r = q \) and yields the existence of Eulerian tour, and thus \( D \) is
+	Eulerian.
+\end{proof}
+
+\begin{theorem}[\textbf{BEST Theorem | de Bruijn, van Aardenne-Ehrenfest, Smith, Tutte Theorem}]
+	Let \( D \) be a connected balanced digraph with vertex set being \( V \). Fix an edge \( e \) of \( D \) and let \( v = init(e) \). Then
+	\[
+		\cE(D,e) = \tau(D,v) \prod_{u\in V} \bace{\outdeg_G(u)-1}!
+	\]
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
