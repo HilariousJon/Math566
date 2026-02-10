@@ -1,0 +1,70 @@
+\begin{proof}
+	Fix a vertex \( v \) and an edge \( e \) leaving \( v \). For each Eulerian tour \( \cE \) that
+	starts with \( v \) and \( e \) and
+	each vertex \( u\ne v \), consider the edge of first arrival at \( u \).
+	\begin{claim}
+		The edges of first arrivals with \( e \) forms an arborescence \( T \) at \( v \).
+	\end{claim}
+	Let us order all incoming edge at every \( u\ne v \) in the order of traversal in \( \cE \), these
+	order have following property:
+	\begin{itemize}
+		\item Among all the incoming edges at \( u\ne v \), the first edge belongs to \( T \).
+		\item At \( v \), the edge \( e \) is the last in the ordering.
+	\end{itemize}
+
+	\begin{lemma}
+		There is a bijection between:
+		$$
+			\begin{gathered}
+				\{\text{Eulerian tours ending with } e \text{ at } v\} \\
+				\updownarrow \\
+				\left\{
+				\begin{aligned}
+					 & \text{Arborescence } T \text{ at } v, \text{ and orderings on} \\
+					 & \text{incoming edges satisfying the above conditions}
+				\end{aligned}
+				\right\}
+			\end{gathered}
+		$$
+	\end{lemma}
+
+	\begin{proof}
+		Suppose we have
+		\begin{itemize}
+			\item Spanning arb at \( v \).
+			\item An ordering on incoming edges satisfying the above two bullet points.
+		\end{itemize}
+		Start with \( v \) and traverse \( e \) which the edge that enters \( v \) last. Traverse the
+		graph by visiting the larger edge at each stop \( u\ne v \). The only time we get stuck is when
+		we visit \( v \) the last time (balanced).
+		\begin{claim}
+			At this point, we have traversed all edges in \( D \).
+		\end{claim}
+		\begin{proof}[\textbf{Proof of Claim}]
+			Suppose otherwise, we left some edges out. Among the vertices incident to these edges, choose
+			\( u \) to be the closest to \( v \), otherwise have \( u\ne v \). Since \( D \) is balanced,
+			we have the same number of incoming edges and out comming edges at \( u \), there is at least
+			one incoming edge at \( u \) not traversed yet. By condition \( 1 \), we have not traversed
+			the unique edge in \( T \) at \( u \). Let \( u' \) be the vertex adjacent to \( e' \), with
+			\( u' \xrightarrow{e'} u \) by definition of \( u' \), \( u' \) must be strictly closer to \(
+			v\) that \( u \), leading to a contradiction $\lightning$.
+		\end{proof}
+	\end{proof}
+\end{proof}
+
+\begin{definition}[\textbf{Directed Laplacian}]
+	Let \( D \) be a digraph with vertex set \( V = \{v_1,\ldots, v_p\} \) and with \( l_i \)
+	loops at vertex \( v_i \). Let \( \LL(D) \) be the \underline{directed laplacian} defined by:
+	$$
+		L_{ij} = \begin{cases}
+			-m_{ij},                  & \text{if } i \neq j \text{ and there are } m_{ij} \text{ edges with} \\
+			                          & \text{initial vertex } v_i \text{ and final vertex } v_j             \\ \\
+			\text{outdeg}(v_i) - l_i, & \text{if } i = j.
+		\end{cases}
+	$$
+\end{definition}
+
+\begin{theorem}
+	\( \det(\LL_{0}) = \tau(D,v_p)\)
+\end{theorem}
+
