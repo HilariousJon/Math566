@@ -1,0 +1,108 @@
+\section{The Sperner Property}
+
+\begin{definition}[\textbf{Partially Ordered Set}]
+	A poset \( P \) or \underline{partially ordered set} is a finite set \( P \) together with a binary
+	relation \( \leq \) such that for all \( x, y, z \in P \):
+	\begin{enumerate}
+		\item (reflexitivity): \( x \leq x \; \forall \; x\in P\).
+		\item (anti-symmetry): If \( x\leq y, y\leq x \) then \( x=y \).
+		\item (transtivity): If \( x \leq y, y\leq zs \implies x \leq z \).
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[\textbf{Cover}]
+	If \( x < y \) and no \( z\in P \) satisfies \( x < z < y \), then we say \( y \)
+	\underline{covers} \( x \) and write \( x \lessdot y \).
+\end{definition}
+
+\begin{definition}[\textbf{Hasse Diagram}]
+	The \underline{Hasse diagram} of a poset \( P \) is the graph whose vertices are the elements of
+	\( P \) and whose edges are the \textbf{cover relations}. We draw the Hasse diagram so that if \( x < y \)
+	then \( x \) is below \( y \).
+\end{definition}
+
+\begin{definition}[\textbf{Isomorphism between Posets}]
+	Two posets \( P \) and \( Q \) are \underline{isomorphic} if there is a bijection \( f: P \to Q \)
+	such that for all \( x, y \in P \), \( x \leq y \) if and only if \( f(x) \leq f(y) \).
+\end{definition}
+
+\begin{definition}[\textbf{Chain}]
+	A \underline{chain} \( C \) in a poset \( P \) is a totally ordered subset of \( P \); that is,
+	for all \( x, y \in C \), either \( x < y \) or \( y < x \). A finite chain \( C \) has length \(
+	n\) if \( C \) has \( n+1 \) elements.
+\end{definition}
+
+\begin{definition}[\textbf{Graded Poset}]
+	A finite poset \( P \) is \underline{graded} of rank \( n \) if every maximal chain has length \(
+	n\). A \underline{maximal chain} if it's contained in no larger chain.
+\end{definition}
+
+\begin{definition}
+	If \( P \) is graded poset of rank \( n \) and \( x\in P \), then there exists a rank function \(
+	\rk : P \to \NN \), s.t. \( x \) has rank \( j \), denoted by \( \rk(x) = j \) if any maximal
+	saturated chain of \( P \) with top element \( x \) has length \( j \) only welldefined when the poset is
+	\textbf{graded}.
+\end{definition}
+
+\begin{definition}
+	\( P_j = \{x\in P \; | \; \rk(x) = j\} \) and see that
+	\[
+		P = \bigsqcup_{j=0}^n P_j
+	\]
+\end{definition}
+We are interested in: If a graded poset \( P \) of rank \( n \) has \( p_i \) elements of rank \( i \),
+then we have a generating functions:
+\[
+	F(P,t) = \sum p_i t^i
+\]
+
+\begin{eg}
+	For boolean algebra \( \BB_n \), see that \( F(P,t) = (1+t)^n \) by binomial theorem.
+\end{eg}
+
+\begin{definition}[\textbf{Rank Symmetric}]
+	A graded poset \( P \) of ran \( n \) is \underline{rank-symmetric} if \( p_0 = p_n \), \( p_1 =
+	p_{n-1}, \ldots \) etc.
+\end{definition}
+
+\begin{eg}
+	\( \BB_n \) is rank-symmetric since:
+	\[
+		\binom{n}{0} = \binom{n}{n}, \quad  \binom{n}{1} = \binom{n}{n-1}, \quad \cdots
+	\]
+\end{eg}
+
+\begin{definition}[\textbf{Unimodal}]
+	A graded poset \( P \) of rank \( n \) is \underline{unimodal} if there exists some \( k \) such
+	that
+	\[
+		p_0 \leq p_1 \leq \cdots \leq p_{i-1} \leq p_i \geq p_{i+1} \geq \cdots \geq p_n
+	\]
+\end{definition}
+
+\begin{definition}[\textbf{Antichain}]
+	An \underline{anti-chain} in \( P \) is a subset of \( P \) where \textbf{no two} elements are
+	comparable.
+\end{definition}
+
+\begin{theorem}[\textbf{Sperner's Theorem}]
+	The largest collection of subsets of \( [n] \) such that no two contain each other is
+	\[
+		\binom{[n]}{\lfloor n/2 \rfloor} = \text{ the subsets of }[n] \text{ of size } \lfloor n/2
+		\rfloor
+	\]
+\end{theorem}
+
+\begin{definition}[\textbf{Sperner's Property}]
+	The poset \( P \) has \underline{Sperner's property} if the size of the largest antichain in \( P
+	\) is equal to the \( \max\{P_i \; | \; 0 \leq i \leq n\} \)
+\end{definition}
+
+\begin{definition}[\textbf{Order Matching}]
+	An \underline{order matching} from \( P_i \) to \( P_{i+1} \) is an injective function:
+	\[
+		\mu: P_i \to P_{i+1}
+	\]
+	satisfying that \( x \lessdot \mu(x) \).
+\end{definition}
+
