@@ -1,0 +1,98 @@
+\begin{proposition}
+	Let \( P \) be graded poset of rank \( n \), suppose there exists an integer \( 0\leq j \leq n \)
+	and order matchings:
+	\[
+		P_0 \hookrightarrow P_1 \hookrightarrow \cdots \hookrightarrow P_{j-1} \hookrightarrow P_j
+		\hookleftarrow P_{j+1} \hookleftarrow \cdots \hookleftarrow P_n
+	\]
+	then \( P \) is rank-unimodal and Sperner.
+\end{proposition}
+
+\begin{lemma}
+	Suppose there exists a linear transformation $U : \mathbb{R}P_i \to \mathbb{R}P_{i+1}$ ($U$ stands for ``up'') satisfying:
+
+	\begin{itemize}
+		\item $U$ is one-to-one.
+		\item For all $x \in P_i$, $U(x)$ is a linear combination of elements $y \in P_{i+1}$ satisfying $x < y$. (We then call $U$ an order-raising operator.)
+	\end{itemize}
+
+	Then there exists an order-matching $\mu : P_i \to P_{i+1}$.
+
+	Similarly, suppose there exists a linear transformation $U : \mathbb{R}P_i \to \mathbb{R}P_{i+1}$ satisfying:
+
+	\begin{itemize}
+		\item $U$ is onto.
+		\item $U$ is an order-raising operator.
+	\end{itemize}
+
+	Then there exists an order-matching $\mu : P_{i+1} \to P_i$.
+\end{lemma}
+Now focus back to \( \BB_n \), our goal is to find such order-rasing operators as in the Lemma, we
+define:
+\[
+	\begin{aligned}
+		U_i: \RR (B_n)_i & \to \RR (B_n)_{i+1}                              \\
+		x                & \mapsto \sum_{x \lessdot y, y \in (B_n)_{i+1}} y
+	\end{aligned}
+\]
+And similarly may define the dual operator as:
+\[
+	\begin{aligned}
+		D_i: \RR (B_n)_i & \to \RR (B_n)_{i-1}                              \\
+		y                & \mapsto \sum_{x \lessdot y, x \in (B_n)_{i-1}} x
+	\end{aligned}
+\]
+The goal here is then to show that \( U_i \) is then indeed an order-raising operator. Namely it is
+injective when \( i \leq \frac{n}{2} \) and surjective when \( i > \frac{n}{2} \). One key
+observation to this ``dual operator'' is that if we take the basis as fixed, we have that:
+\[
+	[D_i] = [U_{i-1}]^{\intercal}
+\]
+where \( [D_i] \) and \( [U_{i-1}] \) stands for the matrix representation of the linear
+transformation. Then we introduce the following lemma.
+
+\begin{lemma}
+	For \( 0 \leq i \leq n \), see that
+	\[
+		D_{i+1} U_i - U_{i-1} D_{i} = (n-2i)\; \II_i
+	\]
+\end{lemma}
+
+\begin{proof}
+	Let \( x \in (B_n)_{i} \), now plug it into the equation, shall see:
+	\[
+		\begin{aligned}
+			D_{i+1}U_i (x) & = D_{i+1} \bace{\sum_{x\lessdot y, y\in (B_n)_{i+1}} y}                     \\
+			               & = \sum_{z \lessdot y, z \in (B_n)_i} \sum_{x\lessdot y, y\in (B_n)_{i+1}} z
+		\end{aligned}
+	\]
+	One would then need some observation to cancel out some unnecessary terms. Notice that
+	\( \abs{x} = \abs{z} = i, x\ne z \), consider the situation where \( \abs{x\cap z} \ne i-1 \),
+	then in this case \( y \) cannot covers \( x \) and \( z \) at the same time, thus this situations
+	are rules out. If \( \abs{x \cap z} =i - 1 \), then works fine as such \( y \) shall exists.
+	Finally if \( x = z \), then there are \( n-i \) such \( y \) exists, since we can add any
+	elements in \( [n] \) that is not in \( x \). Shall yields:
+	\[
+		\begin{aligned}
+			D_{i+1} U_i (x) & = \sum_{\abs{x\cap z} = i - 1, x\ne z} z + (n-i)x
+		\end{aligned}
+	\]
+	Thus similarly, shall have:
+	\[
+		U_{i-1} D_i (x) = \sum_{\abs{x\cap z} = i - 1, x\ne z} z + i x
+	\]
+	thus shall yields:
+	\[
+		D_{i+1} U_i (x) - U_{i-1} D_i (x) = (n-2i)x
+	\]
+	thus:
+	\[
+		D_{i+1} U_i - U_{i-1} D_i = (n-2i)\; \II_i
+	\]
+\end{proof}
+
+\begin{theorem}
+	The operator \( U_i \) defined above is injective if \( i < \frac{n}{2} \) and surjective when \(
+	i \geq \frac{n}{2}\).
+\end{theorem}
+

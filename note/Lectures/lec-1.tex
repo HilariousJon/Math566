@@ -97,6 +97,27 @@ This chapter basically collect some linear algebra lemma that maybe helpful acro
 	\]
 \end{proof}
 
+\begin{definition}
+	A Hermitian matrix \( \bA \in \CC_{n\times n} \) is \underline{positive semidefinite} if for every
+	\( x \in \CC^n \), have \( x^* \bA x \geq 0 \).
+\end{definition}
+
+\begin{theorem}
+	\( \bA \) is positive semidefinite if and only if all eigenvalues of \( \bA \) are \( \geq 0 \).
+\end{theorem}
+
+\begin{lemma}
+	Let \( \bA \) be an \( n\times m \) matrix, then \( \bA \bA^* \in \CC_{n\times n} \) is positive
+	semidefinite.
+\end{lemma}
+
+\begin{proof}
+	Straightforward to have:
+	\[
+		x^* \bA \bA^* x = \norm{\bA^* x}^2 \geq 0
+	\]
+\end{proof}
+
 % \chapter{Walks in Graph}
 
 \section{Graph Eigenvalues}
